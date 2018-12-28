@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 过滤数组中一些假值比如false, null "" 0 undefined */
+        const compact=arr=>arr.filter(Boolean);
+        compact([111,2222,0,1,false,undefined,null,"",]);
+        console.log( compact([111,2222,0,1,false,undefined,null,"",]));
+        
+        /* ~~4.9与Math.floor(4.9)相同 都为4 */
+        /* 区别Math方法：ceil floor round */
+        console.log(Math.ceil(4.5));
+
+        /* 短路运算符 && || */
+        var str1=1&&undefined;
+        var str2=null||0;
+        console.log(str1);
+
+        /* 奇数偶数判断 */
+        var str3=3;
+        console.log((str3%2));
+        /* 数字
+            1.不同进制的表达法
+            2.精确到指定位数的小数
+            
+        */
+       const round=(n,decimals = 0)=>{
+           return Number(`${Math.round(`${n}e${decimals}`)}e-${decimals}`);
+       }
+       console.log(round(1.3556,2));
+
+       /* 数组：统计数组相同个数 */
+    </script>
+</body>
+</html>

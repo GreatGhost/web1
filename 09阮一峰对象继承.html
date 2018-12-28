@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Animal() {
+            this.species = '动物';
+        }
+        Animal.prototype.eat = function () {
+            console.log('吃')
+        }
+
+        function Cat(name, color) {
+            Animal.apply(this, arguments);
+            this.name = name;
+            this.color = color;
+        }
+        var cat1 = new Cat('猫', 'black');
+
+        function Man() {
+            this.type = '人类';
+        }
+        Man.prototype.eat = function () {
+            console.log('21431')
+            console.log('吃肉');
+        }
+
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        Person.prototype = new Man();
+        Person.prototype.constructor = Person;
+        var p = new Person('王浩', 25);
+        p.eat();
+
+        /* 非构造函数拷贝  浅拷贝*/
+        var Chinese = {
+            nation: '中国',
+            birthPlaces: ['北京', '上海', '香港']
+        };
+
+        function extendCopy(p) {
+
+            var c = {};
+
+            for (var i in p) {
+                c[i] = p[i];
+            }
+
+            c.uber = p;
+
+            return c;
+        }
+        var Doctor = extendCopy(Chinese);
+        console.log(Doctor);
+        Doctor.birthPlaces.push('厦门');
+
+        console.log(Chinese);
+        /* 
+        
+        深拷贝
+        */
+        function deepCopy(p, c) {
+
+            var c = c || {};
+
+            for (var i in p) {
+
+                if (typeof p[i] === 'object') {
+
+                    c[i] = (p[i].constructor === Array) ? [] : {};
+
+                    deepCopy(p[i], c[i]);
+
+                } else {
+
+                    c[i] = p[i];
+
+                }
+            }
+
+            return c;
+        }
+    </script>
+</body>
+
+</html>

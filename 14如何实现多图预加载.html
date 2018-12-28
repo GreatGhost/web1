@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*         一些游戏类的素材比较多的应用，打开网页时，预先加载需要用到的各种资源如图片、flash以及各种静态文件     */
+
+        var count = 0, // 计数器
+            source = [{
+                "url": "image/mm1.jpg"
+            },{
+                "url": "image/mm2.png"
+            },{
+                "url": "image/loading.gif"
+            }],
+            imgs = [];
+    console.log(source.length);
+        /*
+         * （Array）source 图片url
+         * （Fun）cb 回调
+         */
+
+        function preLoadImg(source, cb) {
+            var frag = document.createDocumentFragment();
+            for(let i=0;i<source.length;i++){
+                imgs[i] = new Image();
+                imgs[i].onload = function () {
+                    if (++count === source.length) {
+                        cb && cb();
+                    }
+                }
+                imgs[i].src = source[i].url;
+                frag.appendChild(imgs[i]);               
+            }
+            document.body.appendChild(frag);
+        }
+        preLoadImg(source);
+        /* promise */
+        // 预处理图片
+        Array.prototype.forEach=function(arr){
+            
+        }
+        function preLoadImg2(source) {
+            let pr = [];
+            for(let i=0;i<source.length;i++){
+                console.log(source[i]);
+                let p=loadImage(source[i].url);
+                p.then(img => this.images.push(img))
+                    .catch(err => console.log(err))
+                pr.push(p);
+            }
+/*             source.forEach(url => { // 预加载图片
+                let p = loadImage(url)
+                    .then(img => this.images.push(img))
+                    .catch(err => console.log(err))
+                pr.push(p);
+            }) */
+
+            // 图片全部加载完
+            Promise.all(pr)
+                .then((res) => {
+                    // do sth
+                    console.log(res);
+                });
+
+        }
+        // 预加载图片
+        function loadImage(url) {
+            return new Promise((resolve, reject) => {
+                let img = new Image();
+                img.src = url;
+                img.onload = () => resolve(img);
+                img.onerror = reject;
+
+            })
+        }
+        preLoadImg2(source);
+    </script>
+</body>
+
+</html>

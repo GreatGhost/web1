@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>file表单处理</title>
+</head>
+<body>
+	<input type="file" name="file" onchange="showPreview(this)" />  
+    <img id="portrait" src="" width="70" height="75">  
+	<div class="result"></div>
+	<script type="text/javascript">  
+        function showPreview(source) {  
+            var file = source.files[0];  
+            if(window.FileReader) {  
+                var fr = new FileReader();  
+                fr.onloadend = function(e) {
+                	var img=new Image();
+                	img.src=e.target.result;
+                	var result=document.getElementsByClassName('result')[0];
+                	result.appendChild(img);
+                	console.log(result);
+                    document.getElementById("portrait").src = e.target.result;  
+                };  
+                fr.readAsDataURL(file);  //也是利用将图片作为url读出
+            }  
+        }  
+    </script>  
+  
+
+</body>
+</html>

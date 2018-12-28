@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .demo span {
+            font-size: 12px;
+            color: #000;
+
+        }
+
+        .demo span.active {
+            font-size: 18px;
+            font-weight: 700;
+            color: rgb(51, 119, 255);
+        }
+
+        #pop {
+            width: 300px;
+            height: 200px;
+            border: 1px solid;
+            position: relative;
+        }
+
+        #pop.reveal {
+            border: 5px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo">
+        <span>你好</span>
+    </div>
+    <div id="pop">
+
+    </div>
+    <button id="btn">单击</button>
+    <script>
+        //宋耦合 css和js不要过度耦合
+        function addClass() {
+            let span = document.getElementsByClassName('demo')[0].getElementsByTagName('span')[0];
+            span.className = 'active';
+        }
+        var btn = document.getElementById('btn');
+        btn.onclick = function () {
+            addClass();
+        }
+        //事件处理
+        //隔离应用逻辑。将事件从应用逻辑中删除
+        //改进的做法
+        var MyApplication = {
+            handleClick: function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                this.showPopup(event.clientX, event.clientY);
+            },
+            showPopup: function (x, y) {
+                var popup = document.getElementById('pop');
+                popup.style.left = x + 'px';
+                popup.style.top = y + 'px';
+                popup.className = 'reveal';
+            }
+        };
+        var element = document.getElementById('pop');
+        addListener(element, 'click', function (event) {
+            MyApplication.handleClick(event);
+        });
+
+        function addListener(element, event, fn) {
+            return element.addEventListener(event, fn);
+        }
+
+        // 三.配置数据
+        // 1、URL
+        // 2、需要展现给用户的字符串
+        // 3、重复的值
+        // 4、配置项
+        // 5、任何可能发生变更的值
+        //好的做法
+        //四.函数优化
+
+        /*     　　1、避免出现超大函数
+
+　　2、独立出来的函数有助于代码复用
+
+　　3、独立出来的函数更容易被覆写
+
+　　4、独立出来的函数如果拥有一个良好的命名，它本身就起到了注释的作用
+    【尽量减少参数数量】
+    【传递对象参数代替过长的参数列表】 
+
+*/
+        function getInfo(obj) {
+            console.log(obj.name);
+        }
+
+        //五条件优化
+
+        function getResult() {
+            let arr = ['a', 'b', 'c'];
+            if (arr.includes(a)) return true;
+            return false;
+        }
+        var isSummer = function () {
+            var date = new Date();
+            return date.getMonth() >= 6 && date.getMonth() <= 9;
+        };
+
+        var getPrice = function (price) {
+            if (isSummer()) { // 夏天
+                return price * 0.8;
+            }
+            return price;
+        };
+        //【提前让函数退出代替嵌套条件分支】
+
+        //六循环优化
+        //下面我们灵活地运用循环，可以得到跟上面代码一样的效果
+        //break跳出循环 return退出方法（可以作为循环的退出）不过循环后续方法将无法执行。。可以如此return print(i);
+        
+    </script>
+</body>
+
+</html>

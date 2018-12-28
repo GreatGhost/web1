@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组的reduce</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		.parent{
+			width:600px;
+			display: flex;
+		}
+		.parent div{
+			height:200px;
+		}
+		.item1{
+			flex-grow:2;
+			background: black;
+		}
+		.item2{
+			flex-grow:1;
+			flex-shrink: 2;
+			background: green;
+		}
+		/* 固定宽度 */
+		.item3{
+			/*百分比时应为父级的百分之几*/
+			flex-basis:20%;
+			/* flex-basis:auto; */
+			/* flex-basis:100px; */
+			background: lightblue;
+		}
+	</style>
+</head>
+<body>
+	<div class="rect"></div>
+	<button plain disabled="{{hasEdit}}"></button>
+	<div class="parent">
+		<div class="item1"></div>
+		<div class="item2"></div>
+		<div class="item3"></div>
+	</div>
+	<script type="text/javascript">
+		/*数组方法reduce类似递归*/
+		var arr=[1,2,3,4,5];
+		function sum(arr){
+			var sum=arr.reduce(function(x,y){
+				return x+y;
+			});
+			return sum;
+		}
+		console.log(sum(arr));
+		var c='';
+		console.log(typeof c);
+		let x=1;
+		const y=100;
+		x=25;
+		 console.log(x);
+		 /*数组继承时注意事项*/	
+		 var obj=1;
+		 var obj2=obj;
+		 obj2=3;
+		 console.log(obj);
+		 var obj3=[1,2,3,4,5,6];
+		var obj4=obj3.concat();
+		obj4[0]=100;
+		console.log(obj3);
+		console.log(obj4);
+
+		/*对象继承*/
+		var obj5={a:'2',b:"2"};
+		var obj6=Object.assign({},obj5);
+		obj6['a']=10000;
+		console.log(obj5);
+		console.log(obj6);
+
+		/*数组方法reduce深入研究*/
+		var obj7={name:'小明',age:25,job:'IT'};
+		var obj8=Object.keys(obj7);
+		var result=Object.keys(obj7).reduce((map,key)=>{
+			if(obj7[key]){
+				map[key]=obj7[key];
+			};
+			return map;
+		},{});
+		console.log(obj8);
+		console.log(result);
+		//
+		//
+		//数组map 方法 f返回一个数组；
+		var obj9=[1,2,3,4,5,8,10];
+		var result2=obj9.map(item=>{
+			return item*item;
+		});
+		console.log(["江苏","安徽","山东","湖北","江西","上海","重庆","浙江","湖南","广东","广西","河南","福建","辽宁","河北","海南","四川","云南","天津"]);
+
+	 
+	</script>
+</body>
+</html>

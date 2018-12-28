@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+    <script>
+        //优化方案一
+        var fragment=document.createDocumentFragment();
+        for(let i=0;i<200;i++){
+            let div=document.createElement('div');
+            div.textContent=i;
+            fragment.appendChild(div);
+        }
+        document.body.appendChild(fragment);
+        //数组分块技术：　这个模型的一个缺点在于当一个消息需要太长时间才能完成，Web应用无法处理用户的交互，例如点击或滚动; 简单点就是一个异步耗费太长事件，25毫秒
+        //短时间页面添加大量的DOM节点，让浏览器吃不消，就会出现卡顿，甚至假死的情况
+        function chunk(array,process,context){
+    setTimeout(function(){
+        //取出下一个条目并处理
+        var item = array.shift();
+        process.call(context,item);
+        //若还有条目，再设置另一个定时器
+        if(array.length > 0){
+            setTimeout(arguments.callee,100);
+        }
+    },100);    
+}
+var data = [1,2,3,4,5,6,7,8,9,0];
+function printValue(item){
+    var div = document.getElementById('myDiv');
+    div.innerHTML += item + '<br>';
+}
+//chunk(data.concat(),printValue);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+/*         var lastHouses = new Map();
+
+        function filterHouse(houses) {
+            var remainsHouses = [],
+                newHouses = [];
+            houses.map(house => lastHouses.has(house.id) ? remainsHouses.push(house) :
+                newHouses.push(house));
+            newHouses.map(house => lastHouses.set(house.id, house));
+            return {
+                remainsHouses,
+                newHouses
+            };
+        } */
+
+        var lastHouses = new Set();
+
+        function filterHouse(houses) {
+            var remainsHouses = [],
+                newHouses = [];
+            houses.map(house => lastHouses.has(house.id) ? remainsHouses.push(house) :
+                newHouses.push(house));
+            newHouses.map(house => lastHouses.add(house.id));
+            return {
+                remainsHouses,
+                newHouses
+            };
+        }
+         console.log(filterHouse([{name:'东方福地',id:1025212},{name:'亲亲家园',id:10251212},{name:'东方福地',id:1025212},{name:'万达',id:1254521},{name:'亲亲家园三期',id:2511121451414}]));
+
+        lastHouses.forEach((k,v)=>{
+            console.log(k+':'+v);
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button tag="login" id="button">点击打开登录浮层</button>
+    <script>
+        /* 很重要，面向对象，封装技术*/
+        /* 代理模式 */
+        var myImage = (function () {
+            let imgNode = document.createElement('img');
+            document.body.appendChild(imgNode);
+            return {
+                setSrc: function (src) {
+                    imgNode.src = src;
+                }
+            }
+        })();
+        var proxyImg = (function () {
+            var img = new Image();
+            img.onload = function () {
+                myImage.setSrc(this.src);
+            };
+            return {
+                setSrc: function (src) {
+                    setTimeout(function () {
+                        img.src = src;
+                    }, 1000);
+                    myImage.setSrc('image/loading.gif');
+                }
+            }
+        })();
+
+        proxyImg.setSrc('image/mm2.png');
+        /* 迭代器模式 */
+        function isArraylike(a) {
+            return Object.prototype.toString.call(a) === '[object Array]';
+        }
+        //console.log(isArraylike(['1']));
+        var each = function (obj, callback) {
+            var value,
+                i = 0,
+                length = obj.length,
+                isArray = isArraylike(obj); // isArraylike 函数未实现
+            if (isArray) { // 迭代类数组
+                for (; i < length; i++) {
+                    callback.call(obj[i], i, obj[i]); /* 神奇call */
+                }
+            } else {
+                for (i in obj) { // 迭代object 对象
+                    value = callback.call(obj[i], i, obj[i]);
+                }
+            }
+            return obj;
+        };
+
+        var appendDiv = function (data) {
+            each(data, function (i, n) {
+                var div = document.createElement('div');
+                div.innerHTML = n;
+                document.body.appendChild(div);
+            });
+        };
+
+        appendDiv([1, 2, 3, 4, 5, 6]);
+        appendDiv({
+            a: 1,
+            b: 2,
+            c: 3,
+            d: 4
+        });
+        //var div='12';
+        //console.log(Boolean(div));
+        /* 单例模式 */
+        var getSingle = function (fn) { // 获取单例
+            var result;
+            return function () {
+                return result || (result = fn.apply(this, arguments));
+            }
+        };
+        var createLoginLayer = function () { // 创建登录浮窗
+            console.log(1);
+            var div = document.createElement('div');
+            div.innerHTML = '我是登录浮窗';
+            document.body.appendChild(div);
+            return div;
+        };
+
+        var createSingleLoginLayer = getSingle(createLoginLayer);
+        var loginLayer1 = createSingleLoginLayer();
+        var loginLayer2 = createSingleLoginLayer();
+        console.log(loginLayer1 === loginLayer2); // 输出： true
+
+        /* 【装饰者模式】 */
+
+
+        Function.prototype.after = function (afterfn) {
+            var __self = this;
+            return function () {
+                var ret = __self.apply(this, arguments);
+                afterfn.apply(this, arguments);
+                return ret;
+            }
+        };
+        var showLogin = function () {
+            console.log('打开登录浮层');
+        };
+        var log = function () {
+            console.log('上报标签为: ' + this.getAttribute('tag'));
+
+        };
+        document.getElementById('button').onclick = showLogin.after(log);
+
+        // 打开登录浮层之后上报数据
+
+
+        /* 
+            代码设计原则
+            中介者模式很好地体现了最少知识原则。
+            当一个对象发生改变时，只需要通知中介者对象即可
+            外观模式：全自动洗衣机的一键洗衣按钮举
+
+        */
+        var mult = (function () {
+            var cache = {};
+            return function () {
+                var args = Array.prototype.join.call(arguments, ','); /* call将变量转化为数组 */
+                if (cache[args]) {
+                    return cache[args];
+                }
+                var a = 1;
+                for (var i = 0, l = arguments.length; i < l; i++) {
+
+                    a = a * arguments[i];
+                }
+                return cache[args] = a;
+            }
+        })();
+        mult(1, 2, 3); // 输出： 6
+
+
+        // 实际上，每当看到一大片的if或者swtich-case语句时，第一时间就应该考虑，能否利用对象的多态性来重构它们
+        var Animal = function (a) {
+            a.shout();
+        }
+        var Chicken = function () {};
+        Chicken.prototype.shout = function () {
+            console.log('咯咯咯');
+
+        }
+        Animal(new Chicken());
+
+        /* 
+        【放置挂钩】
+        【使用回调函数】
+
+        
+        */
+        var arrayMap = function (ary, callback) {
+            var i = 0,
+                length = ary.length,
+                value,
+                ret = [];
+            for (; i < length; i++) {
+                value = callback(i, ary[i]);
+                ret.push(value);
+            }
+            return ret;
+        }
+        var a = arrayMap([1, 2, 3], function (i, n) {
+            return n * 2;
+        });
+        var b = arrayMap([1, 2, 3], function (i, n) {
+            return n * 3;
+        });
+
+        console.log(a); // 输出：[ 2, 4, 6 ]
+        console.log(b); // 输出：[ 3, 6, 9 ]
+    </script>
+</body>
+
+</html>

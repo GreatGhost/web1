@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="demo">
+
+    </div>
+    <script>
+        /* 
+            name:获取信息
+            @param: 传id参数
+
+        */
+        function getInfo(id) {
+            //每个逗号之后要有空格
+            let user, name, address;
+            let number = 10;
+            //运算符与变量之间要有空格
+            let count = number * 100;
+
+        }
+
+        /* 
+            获取数据方法
+        */
+        function getData() {
+
+        }
+
+        //eval的使用
+        var obj="{name:'王菲',age:15}";
+        obj=eval('('+obj+')');
+        console.log(obj);
+        //【引号要一致】
+        //　使用单引号作为字符串的定义符号，而不是双引号，因为HTML中标准属性的定义符是双引号
+        
+        function onInsertHTML(){
+            var demo=document.getElementsByClassName('demo')[0];
+            console.log(demo);
+            // 两种方法添加innerHTML
+            var html = '<div><span>123</span><span>111</span>'+
+                '<input type="text" value="请输入">'+
+            '</div>';
+            var html1 = '<div><span>123</span><span>111</span>\
+                <input type="text" value="请输入">\
+            </div>';
+            demo.innerHTML = html1;
+        }
+        onInsertHTML();
+
+        // 二注释说明
+/*         指示器        局部作用域           模块作用域         指示器含义     
+fn[通用]     fn_sync            fnSync            通用函数指示器
+curry       curry_make_user    curryMakeUser     返回指定参数的函数
+destroy     destroy_entry      destroyEntry      移除数据结构，意味着必要时会回收数据引用
+remove      remove_element     removeElement     移除数据结构的另一种写法
+empty       empty_cache_map    emptyCacheMap     移除数据结构的一些或者全部成员，不会移除容器
+fetch       fetch_user_list    fetchUserList     返回从外部源获取的数据
+get         get_user_list      getUserList       返回对象或者其他内部数据结构中的数据
+make        make_user          makeUser          返回新建对象(不使用new操作符)
+on          on_mouseover       onMouseover       事件处理程序。事件应是单字的，和HTML标记一致
+save        save_user_list     saveUserList      把数据保存到对象或者其他内部数据结构中
+set         set_user_name      setUserName       初始化或者更新通过参数提供的值
+store       store_user_list    storeUserList     发送数据到外部源进行存储，比如通过AJAX调用
+update      update_user_list   updateUserList    和set类似，但有“先前己经初始化了”的暗含意思 
+
+fn destroy remove empty fetch get make on save set store update
+
+*/
+/* 【变量声明和赋值】　
+
+　　1、创建新对象、映射或者数组的时候，使用{}或者[]]代替new Object()或者new Array()
+
+　　2、使用工具方法复制对象和数组
+
+　　3、一开始就在函数作用域内，使用单个var关键字，显式地声明所有的变量
+
+　　4、不要使用块
+
+　　5、把所有函数赋给变量。这进一步巩固了JavaScript把函数当作第一类对象的事实
+
+　　6、 当函数需要三个以上的参数时，使用具名参数(named arguments)，因为位置参数的含义很容易忘记，并且也不能进行自我说明
+
+　　7、每条变量赋值语句占用一行。尽可能按字母或者逻辑来排序。多个声明可以放在单行上
+ */
+var obj2={};
+var arr2=[];
+var obj3=Object.create(obj2);//拷贝对象
+// 命名空间
+// JS模板
+// 【事件处理】
+
+spa.module = (function(){
+
+})();
+
+// 把所有私有的DOM方法聚集在它们自己的区块里面。这些方法会访问和修改DOM，因此需要浏览器才能运行。一个DOM方法的例子是移动CSS sprite。set JqueryMap方法用来缓存jQuery集合
+
+// 　　把所有的私有事件处理程序聚集在它们自己的区块里面。这些方法会处理事件，比如按钮点击、按下按键、浏览器容器缩放、或者接收Websocket消息。事件处理程序理一般会调用DOM方法来修改DOM，而不是它们自己直接去修改DOM
+    
+    
+    </script>
+</body>
+
+</html>

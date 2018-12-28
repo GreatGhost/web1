@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>javascript难点</title>
+</head>
+<body>
+    <script>
+        /* 1立即函数 */    
+        var fn=(function(){
+            var n=0;
+            //console.log(n);
+            function f1(){
+                console.log(n);
+                n++;
+            }
+            return f1;
+        })();
+        fn();
+        fn();
+        fn();
+    //fn();立即函数
+
+        /* 2闭包 发生闭包，变量存在内存中*/
+        var fn2=function(){
+            var n=0;
+            function f1(){
+                n+=1;
+                console.log(n);
+            }
+            return f1;
+        }
+        var result=fn2();
+        result();
+        result();
+    /* 使用闭包定义私有变量  this 构造函数涉及到闭包， 私有变量*/
+    function Fn2(){
+        var name='局部变量';
+        this.setName=function(){
+            name='闭包更改';
+        }
+        this.getName=function(){
+            return name;
+        }
+    }
+    var p1=new Fn2();
+    p1.setName();
+    console.log(p1.name);
+    console.log(p1.getName());
+
+    /* prototype prototype用于设置所有实例对象共有的属性和方法 */
+    function Rectangle(x,y){
+        this.width=x;
+        this.height=y;
+    }
+    Rectangle.prototype.getData=function(){
+        return {
+            area:this.width*this.height
+        }
+    }
+    var rect=new Rectangle(3,4);
+    console.log(rect.getData());
+
+    /* 5模块化 */
+
+    var module=(function(){
+
+
+        function add(){
+            console.log();
+        }
+        return {
+            description:'这是描述文字',
+            add:add
+        }
+    })();
+
+    /* 6变量提升 */
+
+    /*  7curry 科里化   传参，*/
+
+    /* 8apply call bind */
+    var user ={
+        greet:'hello',
+        get:function(name){
+            console.log(this);
+            console.log(this.greet+name);
+        }
+    }
+    var user2={
+        greet:'apple'
+    }
+    user.get.call(user2,'不对');
+    /* 9.Memorize*/
+    
+    </script>
+</body>
+</html>

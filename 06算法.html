@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 算法学习之前准备 Math.randome();Math.abs();Math.ceil();Math.floor();
+
+        //前端学算法之顺序算法
+
+        var arr = [1, 2, 3, 4, 100, 1020, 1024];
+
+        function getNumber(a) {
+            for (let i = 0; i < arr.length; i++) {
+                if (a == arr[i]) return true;
+            }
+            return false;
+        }
+
+        //前端数据接口之栈 类1
+        function Stack() {
+            //各种属性和方法的声明
+            let arr = [];
+            this.push = function (item) {
+                this.arr.push(item);
+            }
+        }
+        Stack.prototype.clear = function () {
+            this.arr = [];
+        }
+        Stack.prototype.print = function () {
+            console.log(this.arr.toString())
+        }
+        //类2
+        class Stack2 {
+
+            constructor() {
+                this.items = [];
+            }
+
+            push(element) {
+                this.items.push(element);
+            }
+            //其他方法
+        }
+        let _items = Symbol(); //{1}
+class Stack3 {
+ constructor () {
+ 　　this.items = []; //{2}
+ }
+
+ push(element){
+        this.items.push(element);
+    }
+print(){
+    console.log(this.items.toString());
+}
+ //Stack方法
+}
+    let stack=new Stack3();
+    let objectSymbols = Object.getOwnPropertySymbols(stack);
+    console.log(objectSymbols.length); // 1    
+    stack.push(8);
+    stack.push(5);
+    stack.print();
+    </script>   
+</body>
+
+</html>

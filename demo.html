@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="initial-scale=1.0,width=device-width">
+</head>
+<style>
+	*{
+		margin:0;padding:0;
+	}
+	.tab{
+		width:100%;
+		height:30px;
+		overflow-x: auto;
+		display: flex;
+	}
+	.tab-item{
+		flex-basis:25%;
+		flex-grow: 0;
+		flex-shrink: 0;
+		display: inline-block;
+		height:30px;
+		line-height: 30px;
+		text-align: center;
+		box-sizing: border-box;
+	}
+	.nine{
+		width:90px;
+		height:90px;
+	}
+	.nine .item{
+		float: left;
+		width:30px;
+		height:30px;
+		box-sizing: border-box;
+		line-height: 30px;
+		text-align: center;
+		border:1px solid #ccc;
+		border-collapse: collapse;
+	}
+	.nine .item:hover{
+		border:1px solid red!important;
+		color:red!important;
+	}
+		.nav{
+			color:red;
+		}
+		.nav:hover{
+			color:black;
+		}
+		.scroll .item{
+			width:400px;
+			height:400px;
+			position: relative;
+			border:1px solid;
+		}
+		.scroll .item .child{
+			position: absolute;
+			width:50px;
+			height:50px;
+			top:50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+			border:1px solid;
+		}
+</style>
+<body>
+		<div class="tab">
+			<div class="tab-item">tab2</div>
+			<div class="tab-item">tab3</div>
+			<div class="tab-item">tab4</div>
+			<div class="tab-item">tab5</div>
+			<div class="tab-item">tab6</div>
+		</div>
+		<div class="nine">
+			<div class="item">1</div>
+			<div class="item">2</div>
+			<div class="item">3</div>
+			<div class="item">4</div>
+			<div class="item">5</div>
+			<div class="item">6</div>
+			<div class="item">7</div>
+			<div class="item">8</div>
+			<div class="item">9</div>
+		</div>
+		<div class="scroll">
+			<div class="item">
+				<div class="child"></div>
+			</div>
+			<div class="item">
+				<div class="child"></div>
+			</div>
+			<div class="item">
+				<div class="child"></div>
+			</div>
+			<div class="item">
+				<div class="child"></div>
+			</div>
+			<div class="item">
+				<div class="child last"></div>
+			</div>
+		</div>
+		<script src="8常用DOM.js"></script>
+		
+	<script type="text/javascript">
+		var child=document.querySelector('.scroll .item .child.last');
+		var arr=[{"productId":"11","num":8,"rentunit":"租期24个月,￥599/月","renttype":"租完即送","marketprice":"￥599","productRentId":"60"},{"productId":"11","num":1,"rentunit":"租期12个月,￥599/月","renttype":"租完即送","marketprice":"￥599","productRentId":"60"},{"productId":"265","num":1,"rentunit":"租期0个月,￥80/月","renttype":"固定租期","marketprice":"￥80","productRentId":"2882"}];
+		for(let i=0;i<arr.length;i++){
+			console.log(arr)
+		}
+		var obj={};
+		if(obj){
+			console.log(1234);
+		}
+		var str='<p><img src="/xze/userfiles/users/593/files/201810/201810131534593dx2.jpg" alt="" /></p><p><img src="http://res2.zmxzu.com/xze/userfiles/users/593/files/201810/20181013154424ut7<p><img src="http://res2.zmxzu.com/xze/userfiles/users/593/files/201810/20181013154424ut7<p><img src="http://res2.zmxzu.com/xze/userfiles/users/593/files/201810/20181013154424ut7';
+		var reg='http://res2.zmxzu.com';
+		var reg2=/http:\/\/res2.zmxzu.com/g;
+			console.log(str.replace(reg2,''));
+			var str3='////33333';
+			console.log(str3.lastIndexOf('/'));
+				console.log(str3.substring(str3.lastIndexOf('/')+1,str3.length));
+				//window.localStorage.setItem("usertmpid",'13');
+				var a =1234;
+				if(a>0&&!window.localStorage.getItem('usertmpid')){
+					console.log('数据存在')
+				}else{
+					console.log('数据不存在');
+				}
+				var abc='0';
+				if(abc!=='0'){
+					console.log(1);
+				}else{
+					console.log(abc);
+					console.log(abc!='123');
+				}
+				var z={};
+				if(z.zzz==undefined){
+					console.log(22);
+				}else{
+					console.log(141)
+				}
+				var aaaa=window.localStorage.getItem('aaaaa');
+				if(!aaaa){
+					console.log(111)
+				}else{
+					console.log('222')
+				}
+
+
+				if(null){
+					console.log('空数组bool判断为true')
+				}else{
+					console.log(false);
+				}
+				if(undefined){console.log(true)}else{
+					console.log(false);
+				}
+				function Man(){
+					this.name='构造函数';
+				}
+				var m=new Man();
+				console.log(m.name);
+				console.log(m instanceof Man);
+				const a1=[
+				{name:'1',color:'red'},
+				{name:'2',color:'blue'}
+				];
+				function test1(color){
+					return a1.filter(f=>f.color==color);
+				}
+				console.log(test1('red'));
+				  let path=['/','login','setpwd','reg'];
+				  console.log(path.includes('/'));
+				 class Point{
+				 	constructor(x,y){
+				 		Object.assign(this,{x,y});
+				 	}
+				 }
+				let token=null;
+				let u=undefined;
+				if(u){
+					console.log('null')
+				}else{
+					console.log(14124);
+				}
+var j2="[{value:'xuanzhong',Selectd:{ShowIds:['div_9144','div_9147'],HideIds:['div_9156','div_9162'],EnableIds:['div_9156','div_9162'],UnEnableIds:['div_9156','div_9162']},UnSelectd:{ShowIds:[],HideIds:[],EnableIds:[],UnEnableIds:[]}}]";
+    
+
+ var obj =(new Function("return "+""+j2+""))();
+				console.log(obj);
+				var regPos = /^\d+(\.\d+)?$/; //非负浮点数
+				console.log(regPos.test('2'))
+				console.log(new Date('2018-11-11').getMonth()+1);
+var obj2=[{name:'小明'},{name:'小东'}];
+
+function gtFilter(value) {
+   return value.name==='小明';
+}
+console.log(obj2.filter(gtFilter));
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="content"></div>
+    <script>
+        //Promise是一个构造函数，自己身上有all、reject、resolve这几个眼熟的方法，原型上有then、catch等同样很眼熟的方法
+        //1.promise一般包括在一个函数里
+        function Async() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    console.log('promise的初步应用');
+                    resolve('fullfill数据');
+                }, 2000)
+            });
+        }
+        Async();
+        /* 链式操作的用法 fn1.then().then()*/
+
+
+        /* promise的then方法的调用 */
+        function getNumber() {
+            return new Promise(function (resolve, reject) {
+                let timer = setTimeout(function () {
+                    let number = Math.ceil(Math.random() * 100);
+                    if (number > 50) {
+                        let err = {
+                            name: '错误信息',
+                            number: number
+                        };
+                        /* 传值success */
+                        reject(err);
+
+                    } else {
+                        resolve(number);
+                    }
+                }, 1000); //此处说明getNumber()比Async更早进入任务栈
+            });
+        }
+        getNumber().then(function (data) {
+            console.log('resovle');
+            console.log(data);
+            //console.log(dfasfdasf);
+        }).catch(function (reason) {
+            console.log(reason);
+        });
+
+        /* catch方法 1.类似then(f1,f2)里的f2，但是f2与catch不能同时出现，否则只运行f2 2.catch可以抓取then(f1)里的f1函数内错误函数，虽然出错,但是代码还是继续进行*/
+        /* all的用法 */
+        /* all一般建议来处理resolve */
+        function f1() {
+            return new Promise(function (resolve, reject) {
+                var n = Math.random();
+                if (n > 0.5) {
+                    resolve('数字过大1');
+                } else {
+                    n = Math.ceil(n * 255);
+                    reject(n);
+                }
+            });
+        }
+
+        function f2() {
+            return new Promise(function (resolve, reject) {
+                var n = Math.random();
+
+                if (n > 0.5) {
+
+                    resolve('数字过大2');
+                } else {
+                    n = Math.ceil(n * 255);
+                    reject(n);
+                }
+            });
+        }
+
+        function f3() {
+            return new Promise(function (resolve, reject) {
+                var n = Math.random();
+                if (n > 0.5) {
+
+                    resolve('数字过大3');
+                } else {
+                    n = Math.ceil(n * 255);
+                    reject(n);
+                }
+            });
+        }
+        Promise
+            .all([f1(), f2(), f3()]).then(function (results) {
+                console.log(results);
+            }, function (reason) {
+                console.log(reason);
+            });
+
+        //请求某个图片资源 漂亮的操作  已完成
+        function requestImg() {
+            var p = new Promise(function (resolve, reject) {
+                var img = new Image();
+                img.onload = function () {
+                    resolve(img);
+                }
+                img.src = 'image/mm1.jpg';
+            });
+            return p;
+        }
+
+        //延时函数，用于给请求计时
+        function timeout() {
+            var p = new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    reject('图片请求超时');
+                }, 100);
+            });
+            return p;
+        }
+
+        Promise
+            .race([requestImg(), timeout()])
+            .then(function (results) {
+                console.log(results);
+                var content=document.querySelector('.content');
+                content.appendChild(results);
+            })
+            .catch(function (reason) {
+                console.log(reason);
+            });
+    </script>
+</body>
+
+</html>

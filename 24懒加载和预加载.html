@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .item-img{
+            display: block;
+            
+            height: 200px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+            
+
+ <img src="" alt="" class="item-img" lazyload="true" data-original="image/a1.jpg">
+ <img src="" alt="" class="item-img" lazyload="true" data-original="image/a2.jpg">
+ <img src="" alt="" class="item-img" lazyload="true" data-original="image/a3.jpg">
+ <img src="" alt="" class="item-img" lazyload="true" data-original="image/a4.jpg">
+ <img src="" alt="" class="item-img" lazyload="true" data-original="image/a5.jpg">
+ <img src="" alt="" class="item-img" lazyload="true" data-original="image/a6.jpg">
+ <img src="" alt="" class="item-img" lazyload="true" data-original="image/a7.jpg">
+ <img src="" alt="" class="item-img" lazyload="true" data-original="image/a8.jpg">
+ <img src="" alt="" class="item-img" lazyload="true" data-original="image/a9.jpg">
+ <img src="" alt="" class="item-img" lazyload="true" data-original="image/a10.jpg">
+ <script>
+     var viewHeight=document.documentElement.clientHeight;
+     function lazyload(){
+         var list=document.querySelectorAll('img[lazyload][data-original]');
+         Array.prototype.forEach.call(list,function(item,index){
+             var rect;  
+             if(item.dataset.original===""){
+                 return
+             }
+              rect=item.getBoundingClientRect();
+              if(rect.bottom>=0&&rect.top<viewHeight){
+                  (function(){
+                      var image=new Image();
+                      image.src=item.dataset.original;
+                      image.onload=function(){
+                          item.src=image.src;
+                      }
+                      item.removeAttribute('data-original');
+                      item.removeAttribute('lazyload');
+                  })()
+              }
+         });
+     }
+     lazyload();
+     document.addEventListener('scroll',lazyload);
+
+     /*使用html标签 使用Image对象 使用XMLHttpRequest PreLoadJs库来实现 lazyload库*/
+     /*针对Vue react可能还有相应的库 可以作为了解*/
+
+     /*new Image的妙用*/
+ </script>
+</body>
+</html>
